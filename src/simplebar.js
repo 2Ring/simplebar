@@ -150,7 +150,8 @@ export default class SimpleBar {
         this.scrollbarX = this.trackX.querySelector(`.${this.classNames.scrollbar}`);
         this.scrollbarY = this.trackY.querySelector(`.${this.classNames.scrollbar}`);
 
-        this.isRtl = getComputedStyle(this.contentEl).direction === 'rtl';
+        let computedStyle = getComputedStyle(this.contentEl);
+        this.isRtl = computedStyle !== null ? computedStyle.direction === 'rtl' : false;
 
         this.scrollContentEl.style[this.isRtl ? 'paddingLeft' : 'paddingRight'] = `${this.scrollbarWidth || this.offsetSize}px`;
         this.scrollContentEl.style.marginBottom = `-${this.scrollbarWidth*2 || this.offsetSize}px`;
