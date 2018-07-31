@@ -359,11 +359,10 @@ export default class SimpleBar {
         let handleOffset    = ~~((scrollbarSize - handleSize) * scrollPourcent);
 
         
-        let sizeDiff = Math.abs(scrollbarSize - contentSize);
         // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
         // this.isVisible[axis] = scrollbarSize < contentSize;
-
-        this.isVisible[axis] = sizeDiff > 5;
+        let sizeDiff = Math.abs(Math.max(scrollbarSize, 0) - Math.max(contentSize,0));
+        this.isVisible[axis] = sizeDiff > 1;
 
         if (this.isVisible[axis] || this.options.forceVisible) {
             track.style.visibility = 'visible';
