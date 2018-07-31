@@ -780,9 +780,11 @@ function () {
       var scrollPourcent = scrollOffset / (contentSize - scrollbarSize); // Calculate new height/position of drag handle.
 
       var handleSize = Math.max(~~(scrollbarRatio * scrollbarSize), this.options.scrollbarMinSize);
-      var handleOffset = ~~((scrollbarSize - handleSize) * scrollPourcent); // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
+      var handleOffset = ~~((scrollbarSize - handleSize) * scrollPourcent);
+      var sizeDiff = Math.abs(scrollbarSize - contentSize); // Set isVisible to false if scrollbar is not necessary (content is shorter than wrapper)
+      // this.isVisible[axis] = scrollbarSize < contentSize;
 
-      this.isVisible[axis] = scrollbarSize < contentSize;
+      this.isVisible[axis] = sizeDiff > 5;
 
       if (this.isVisible[axis] || this.options.forceVisible) {
         track.style.visibility = 'visible';
